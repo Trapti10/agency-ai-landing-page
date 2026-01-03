@@ -1,13 +1,19 @@
 import React, { useState } from 'react'
 import assets from '../../assets/assets'
 import ThemeToggleBtn from './ThemeToggleBtn'
+import { easeOut, motion } from 'framer-motion'
 
 const Navbar = ({ theme, setTheme }) => {
 
     const [sidebarOpen, setSidebarOpen] = useState(false)
 
     return (
-        <div>
+        <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            translate={{ duration: 0.6, ease: 'easeOut' }}
+        >
+
             <div className="flex justify-between items-center px-4 sm:px-12 lg:px-24 xl:px-40 py-4 sticky top-0 z-20 backdrop-blur-xl font-medium bg-white dark:bg-gray-900/70">
                 <img src={theme === 'dark' ? assets.logo_dark : assets.logo}
                     className='w-32 sm:w-40'
@@ -17,14 +23,14 @@ const Navbar = ({ theme, setTheme }) => {
 
                     <img src={assets.close_icon} alt="" className='w-5 absolute right-4 top-4 sm:hidden' onClick={() => setSidebarOpen(false)} />
 
-                    <a onClick={()=>{setSidebarOpen(false)}} href="#" className='sm:hover:border-b'>Home</a>
-                    <a onClick={()=>{setSidebarOpen(false)}} href="#services" className='sm:hover:border-b'>Services</a>
-                    <a onClick={()=>{setSidebarOpen(false)}} href="#our-work" className='sm:hover:border-b'>Our Work</a>
-                    <a onClick={()=>{setSidebarOpen(false)}} href="#contact-us" className='sm:hover:border-b'>Contact Us</a>
+                    <a onClick={() => { setSidebarOpen(false) }} href="#" className='sm:hover:border-b'>Home</a>
+                    <a onClick={() => { setSidebarOpen(false) }} href="#services" className='sm:hover:border-b'>Services</a>
+                    <a onClick={() => { setSidebarOpen(false) }} href="#our-work" className='sm:hover:border-b'>Our Work</a>
+                    <a onClick={() => { setSidebarOpen(false) }} href="#contact-us" className='sm:hover:border-b'>Contact Us</a>
                 </div>
 
                 <div className='flex items-center gap-2 sm:gap-4'>
-                <ThemeToggleBtn theme={theme} setTheme={setTheme}/>
+                    <ThemeToggleBtn theme={theme} setTheme={setTheme} />
 
                     <img src={theme === 'dark' ? assets.menu_icon_dark : assets.menu_icon} alt="" onClick={() => setSidebarOpen(true)} className='w-8 sm:hidden' />
 
@@ -34,7 +40,7 @@ const Navbar = ({ theme, setTheme }) => {
                     </a>
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }
 
